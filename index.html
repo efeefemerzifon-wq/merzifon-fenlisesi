@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="tr" class="tr-active">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T.C. Millî Eğitim Bakanlığı | Amasya - Merzifon Fen Lisesi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        .en-active .lang-tr { display: none !important; }
+        .tr-active .lang-en { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .meb-red { background-color: #990000; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating-bot { animation: float 3s ease-in-out infinite; }
+
+        /* Arka Plan Desen */
+        .bg-pattern {
+            background-image: linear-gradient(30deg, rgba(153, 0, 0, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(153, 0, 0, 0.03) 87.5%, rgba(153, 0, 0, 0.03)),
+                              linear-gradient(150deg, rgba(153, 0, 0, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(153, 0, 0, 0.03) 87.5%, rgba(153, 0, 0, 0.03));
+            background-size: 40px 70px;
+            position: relative;
+        }
+
+        /* Sol Atatürk Filigranı */
+        .ataturk-watermark {
+            position: absolute !important;
+            top: 250px !important;
+            left: 15px !important;
+            width: 200px !important;
+            height: auto !important;
+            opacity: 0.22;
+            z-index: 1 !important;
+            pointer-events: none;
+            filter: grayscale(10%);
+        }
+        @media (max-width: 768px) {
+            .ataturk-watermark { display: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased flex flex-col min-h-screen bg-pattern">
+
+    <!-- Sol Atatürk Filigranı -->
+    <img src="ataturk.png" class="ataturk-watermark" alt="Atatürk" onerror="this.style.display='none'">
+
+    <!-- Üst Kurumsal MEB Barı -->
+    <div class="bg-slate-900 text-slate-300 text-xs py-2 px-3 sm:px-4 border-b border-slate-800 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <span class="text-center sm:text-left">
+                <span class="lang-tr">T.C. Millî Eğitim Bakanlığı | Amasya - Merzifon Fen Lisesi</span>
+                <span class="lang-en">Ministry of National Education | Amasya - Merzifon Science High School</span>
+            </span>
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleLanguage()" class="font-bold text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 transition-colors cursor-pointer shadow-sm text-xs">
+                    <span class="lang-tr">EN / <span class="underline">TR</span></span>
+                    <span class="lang-en"><span class="underline">EN</span> / TR</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ana Header & Kırmızı Başlık Alanı -->
+    <header class="meb-red text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('anasayfa')">
+                <img src="image_3.png" class="h-10 sm:h-14 w-auto object-contain bg-white p-1 rounded shadow" alt="MFL Logo" onerror="this.style.display='none'">
+                <div>
+                    <h1 class="font-extrabold text-sm sm:text-xl tracking-wide">
+                        <span class="lang-tr">MERZİFON FEN LİSESİ</span>
+                        <span class="lang-en">MERZİFON SCIENCE HIGH SCHOOL</span>
+                    </h1>
+                    <p class="text-[10px] sm:text-xs text-red-200">
+                        <span class="lang-tr">Resmi Eğitim Portalı ve Ansiklopedi</span>
+                        <span class="lang-en">Official Education Portal & Encyclopedia</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sağ Üst Burger Menü -->
+            <div class="relative">
+                <button onclick="toggleDropdownMenu()" class="px-3 py-2 bg-red-800 hover:bg-red-700 text-white rounded-xl transition-all font-semibold text-xs sm:text-sm cursor-pointer flex items-center space-x-2 border border-red-700 shadow">
+                    <i class="fa-solid fa-bars text-base"></i>
+                    <span class="hidden sm:inline">
+                        <span class="lang-tr">Menü</span>
+                        <span class="lang-en">Menu</span>
+                    </span>
+                </button>
+                <div id="dropdown-menu" class="absolute right-0 mt-2 w-72 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 hidden z-50 p-2 space-y-1">
+                    <button onclick="switchTab('anasayfa'); toggleDropdownMenu();" class="w-full text-left px-4 py-2 hover:bg-red-50 text-red-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-3">
+                        <i class="fa-solid fa-house text-red-600 w-4"></i>
+                        <span><span class="lang-tr">Ana Sayfa</span><span class="lang-en">Home Page</span></span>
+                    </button>
+                    
+                    <div class="border-t border-slate-100 my-1 pt-1">
+                        <div class="px-3 py-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                            <span class="lang-tr">MFL Ansiklopedi Bölümleri</span>
+                            <span class="lang-en">Encyclopedia Sections</span>
+                        </div>
+                        <button onclick="switchTab('ansiklopedi'); toggleDropdownMenu();" class="w-full text-left px-4 py-2 hover:bg-red-50 text-red-950 rounded-xl text-xs font-medium transition-colors flex items-center space-x-3">
+                            <i class="fa-solid fa-book-open text-red-600 w-4"></i>
+                            <span><span class="lang-tr">Ansiklopedi Ana Sayfa</span><span class="lang-en">Encyclopedia Home</span></span>
+                        </button>
+                        <button onclick="switchTabAndScroll('ansiklopedi', 'bolum-merzifon'); toggleDropdownMenu();" class="w-full text-left px-4 py-1.5 hover:bg-red-50 text-slate-700 rounded-lg text-[11px] transition-colors flex items-center space-x-2 pl-7">
+                            <i class="fa-solid fa-landmark text-red-500 w-3"></i>
+                            <span><span class="lang-tr">Merzifon Tarihi ve Antik Çağlar</span><span class="lang-en">Merzifon History & Antiquity</span></span>
+                        </button>
+                        <button onclick="switchTabAndScroll('ansiklopedi', 'bolum-ataturk'); toggleDropdownMenu();" class="w-full text-left px-4 py-1.5 hover:bg-red-50 text-slate-700 rounded-lg text-[11px] transition-colors flex items-center space-x-2 pl-7">
+                            <i class="fa-solid fa-star-and-crescent text-red-500 w-3"></i>
+                            <span><span class="lang-tr">Atatürk ve Millî Mücadele</span><span class="lang-en">Atatürk & National Struggle</span></span>
+                        </button>
+                        <button onclick="switchTabAndScroll('ansiklopedi', 'bolum-bilimtarihi'); toggleDropdownMenu();" class="w-full text-left px-4 py-1.5 hover:bg-red-50 text-slate-700 rounded-lg text-[11px] transition-colors flex items-center space-x-2 pl-7">
+                            <i class="fa-solid fa-atom text-red-500 w-3"></i>
+                            <span><span class="lang-tr">Türk İslam Bilim Tarihi</span><span class="lang-en">Turco-Islamic Science History</span></span>
+                        </button>
+                        <button onclick="switchTabAndScroll('ansiklopedi', 'bolum-siber'); toggleDropdownMenu();" class="w-full text-left px-4 py-1.5 hover:bg-red-50 text-slate-700 rounded-lg text-[11px] transition-colors flex items-center space-x-2 pl-7">
+                            <i class="fa-solid fa-shield-halved text-red-500 w-3"></i>
+                            <span><span class="lang-tr">Siber Güvenlik Merkezi</span><span class="lang-en">Cyber Security Center</span></span>
+                        </button>
+                    </div>
+
+                    <div class="border-t border-slate-100 my-1 pt-1">
+                        <button onclick="switchTab('projeler'); toggleDropdownMenu();" class="w-full text-left px-4 py-2 hover:bg-red-50 text-red-950 rounded-xl text-xs font-semibold transition-colors flex items-center space-x-3">
+                            <i class="fa-solid fa-diagram-project text-red-600 w-4"></i>
+                            <span><span class="lang-tr">Projelerimiz (Erasmus+)</span><span class="lang-en">Our Projects (Erasmus+)</span></span>
+                        </button>
+                    </div>
+
+                    <!-- BURGER MENÜ YÖNETİCİ GİRİŞİ -->
+                    <div class="border-t border-slate-100 my-1 pt-1">
+                        <button onclick="openAdminLoginModal(); toggleDropdownMenu();" class="w-full text-left px-4 py-2 hover:bg-red-100 text-red-700 rounded-xl text-xs font-bold transition-colors flex items-center space-x-3">
+                            <i class="fa-solid fa-lock text-red-600 w-4"></i>
+                            <span><span class="lang-tr">Yönetici Girişi (Admin)</span><span class="lang-en">Admin Login</span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SAYFA İÇERİKLERİ -->
+    <div class="flex-grow relative z-10">
+        <!-- 1. TAB: ANA SAYFA -->
+        <div id="tab-anasayfa" class="tab-content fade-in max-w-7xl mx-auto px-3 sm:px-4 py-6 space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-5 space-y-3">
+                        <h4 class="font-bold text-sm text-red-950 border-b pb-2"><span class="lang-tr">Okul İstatistikleri ve Bilgiler</span><span class="lang-en">School Statistics & Info</span></h4>
+                        <div class="text-xs space-y-2 text-slate-600">
+                            <div class="flex justify-between"><span><span class="lang-tr">Derslik Sayısı:</span><span class="lang-en">Classrooms:</span></span><span class="font-bold text-red-900">16</span></div>
+                            <div class="flex justify-between"><span><span class="lang-tr">Öğretmen Sayısı:</span><span class="lang-en">Teachers:</span></span><span class="font-bold text-red-900">22</span></div>
+                            <div class="flex justify-between"><span><span class="lang-tr">Öğrenci Sayısı:</span><span class="lang-en">Students:</span></span><span class="font-bold text-red-900">350</span></div>
+                            <div class="flex justify-between"><span><span class="lang-tr">Pansiyon Durumu:</span><span class="lang-en">Dormitory Status:</span></span><span class="font-bold text-amber-600"><span class="lang-tr">Okulda Pansiyon Yok</span><span class="lang-en">No On-site Dorm</span></span></div>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded-xl border border-red-100 text-[11px] text-slate-700 leading-relaxed mt-2">
+                            <span class="lang-tr">Okulumuza bağlı pansiyon bulunmamaktadır. Her yıl 35-40 civarı öğrencimiz Merzifon İrfanlı Anadolu Lisesi Pansiyonunda kalmaktadır (Mesafe: 2 km).</span>
+                            <span class="lang-en">There is no on-site dormitory. Every year around 35-40 students stay at Merzifon İrfanlı Anatolian High School Dormitory (Distance: 2 km).</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/90 backdrop-blur rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-5 space-y-2 text-xs text-slate-700">
+                        <h4 class="font-bold text-sm text-red-950 border-b pb-2"><span class="lang-tr">İletişim ve Adres</span><span class="lang-en">Contact & Address</span></h4>
+                        <p><strong><span class="lang-tr">Adres:</span><span class="lang-en">Address:</span></strong> <span class="lang-tr">Sofular Mah. Kolordu Sok. No:18 Merzifon / Amasya</span><span class="lang-en">Sofular Mah. Kolordu Sok. No:18 Merzifon / Amasya</span></p>
+                        <p><strong><span class="lang-tr">Telefon:</span><span class="lang-en">Phone:</span></strong> 0358 513 4027</p>
+                        <p><strong><span class="lang-tr">E-Posta:</span><span class="lang-en">Email:</span></strong> 973669@meb.k12.tr</p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 space-y-6">
+                    <div class="bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-800 text-white p-5 sm:p-10 relative text-center space-y-4">
+                        <span class="bg-red-600 text-white text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow">
+                            <span class="lang-tr">Erasmus+ Proje Kabulü 2026</span><span class="lang-en">Erasmus+ Project Acceptance 2026</span>
+                        </span>
+                        <h2 class="text-xl sm:text-3xl font-extrabold leading-tight">"Fen Öğretiminde Dijital ve Proje Tabanlı Çözümler"</h2>
+                        <p class="text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
+                            <span class="lang-tr">Merzifon Fen Lisesi 2026 Yılı Erasmus+ Okul Eğitimi Kısa Dönemli Öğrenci ve Personel Hareketliliği Projemiz hibe almaya hak kazanmıştır!</span>
+                            <span class="lang-en">Merzifon Science High School 2026 Erasmus+ Short-Term Mobility Project has been awarded a grant!</span>
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-3 pt-2">
+                            <button onclick="switchTab('ansiklopedi')" class="px-4 sm:px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold shadow transition-all text-xs cursor-pointer">
+                                <span class="lang-tr">MFL Ansiklopedi'ye Git</span><span class="lang-en">Go to Encyclopedia</span>
+                            </button>
+                            <button onclick="switchTab('projeler')" class="px-4 sm:px-5 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-semibold shadow transition-all text-xs border border-slate-700 cursor-pointer">
+                                <span class="lang-tr">Projelerimiz</span><span class="lang-en">Our Projects</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- HABERLER VE DUYURULAR BÖLÜMÜ -->
+                    <div class="bg-white/90 backdrop-blur rounded-3xl shadow-sm border border-slate-200 p-5 sm:p-8 space-y-6">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b pb-4 gap-3">
+                            <h3 class="font-extrabold text-base sm:text-lg text-red-950 flex items-center space-x-3">
+                                <div class="p-2.5 bg-red-600 text-white rounded-xl shadow"><i class="fa-solid fa-newspaper text-base"></i></div>
+                                <span><span class="lang-tr">Okulumuzdan Son Haberler ve Duyurular</span><span class="lang-en">Latest News & Announcements</span></span>
+                            </h3>
+                            <div class="flex items-center space-x-2">
+                                <span id="admin-action-btn" class="hidden">
+                                    <button onclick="openAdminPanel()" class="px-3 py-1.5 bg-red-600 text-white font-bold rounded-lg text-xs shadow hover:bg-red-700 transition-all flex items-center space-x-1 cursor-pointer">
+                                        <i class="fa-solid fa-screwdriver-wrench"></i> 
+                                        <span><span class="lang-tr">Yönetim Paneli</span><span class="lang-en">Admin Panel</span></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="dynamic-news-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OKUL YÖNETİMİ VE TÜM ÖĞRETMEN KADROSU -->
+            <div class="bg-white/90 backdrop-blur rounded-3xl shadow-sm border border-slate-200 p-5 sm:p-8 space-y-8 mt-8">
+                <div class="text-center border-b pb-4">
+                    <span class="text-xs font-bold text-red-600 uppercase tracking-widest"><span class="lang-tr">Akademik ve İdari Kadro</span><span class="lang-en">Academic & Administrative Staff</span></span>
+                    <h3 class="text-xl sm:text-3xl font-extrabold text-red-950 mt-1"><span class="lang-tr">Merzifon Fen Lisesi Personel ve Öğretmen Kadrosu</span><span class="lang-en">Merzifon Science High School Staff & Faculty</span></h3>
+                </div>
+
+                <div id="dynamic-staff-container" class="space-y-8"></div>
+            </div>
+        </div>
+
+        <!-- 2. TAB: MFL ANSİKLOPEDİ -->
+        <div id="tab-ansiklopedi" class="tab-content hidden fade-in max-w-7xl mx-auto px-3 sm:px-4 py-8 space-y-10">
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="bg-red-100 text-red-800 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">
+                    <span class="lang-tr">Kapsamlı Dijital Kaynak</span><span class="lang-en">Comprehensive Digital Resource</span>
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-red-950">
+                    <span class="lang-tr">MFL Ansiklopedi, Yerel Kültür ve Bilim Tarihi Kütüphanesi</span>
+                    <span class="lang-en">MFL Encyclopedia, Local Culture & Science History Library</span>
+                </h2>
+                <p class="text-slate-600 text-xs sm:text-sm">
+                    <span class="lang-tr">Merzifon antik tarihi, Osmanlı dönemi, Atatürk ve Millî Mücadele, Türk-İslam bilim öncüleri ve siber güvenlik merkezi.</span>
+                    <span class="lang-en">Merzifon ancient history, Ottoman era, Atatürk and National Struggle, Turco-Islamic science pioneers and cyber security center.</span>
+                </p>
+            </div>
+
+            <!-- 1. MERZİFON'UN ANTİK ÇAĞLARI VE TARİHİ -->
+            <div id="bolum-merzifon" class="bg-white/90 backdrop-blur rounded-3xl shadow-sm border border-slate-200 p-5 sm:p-8 space-y-6 scroll-mt-24">
+                <div class="border-b pb-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-3 bg-red-600 text-white rounded-xl"><i class="fa-solid fa-landmark text-xl"></i></div>
+                        <div>
+                            <span class="text-xs font-bold text-red-600 uppercase"><span class="lang-tr">Antik Çağlar ve Yerel Kültür</span><span class="lang-en">Antiquity & Local Culture</span></span>
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-red-950"><span class="lang-tr">Merzifon'un Antik Kökenleri ve Phazemonitis Bölgesi</span><span class="lang-en">Ancient Origins of Merzifon and Phazemonitis Region</span></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700 leading-relaxed">
+                    <div class="bg-slate-50 p-5 sm:p-6 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-red-950 text-base"><span class="lang-tr">Antik Dönem ve Pontus Krallığı</span><span class="lang-en">Antiquity and Kingdom of Pontus</span></h4>
+                        <p class="text-xs sm:text-sm"><span class="lang-tr">Tarihsel kayıtlarda <b>Phazemonitis</b> olarak bilinen Merzifon ovası, Hititlerden Perslere, Pontus Krallığı'ndan Roma İmparatorluğu'na kadar pek çok medeniyete ev sahipliği yapmıştır.</span><span class="lang-en">Known in historical records as <b>Phazemonitis</b>, the Merzifon plain has hosted many civilizations.</span></p>
+                    </div>
+                    <div class="bg-slate-50 p-5 sm:p-6 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-red-950 text-base"><span class="lang-tr">Osmanlı Dönemi ve Mimari Miras</span><span class="lang-en">Ottoman Era and Architectural Heritage</span></h4>
+                        <p class="text-xs sm:text-sm"><span class="lang-tr">Türk-İslam döneminde özellikle Selçuklu ve Osmanlı hakimiyetinde önemli bir ilim ve ticaret merkezi olan Merzifon; medeniyet beşiği olmuştur.</span><span class="lang-en">Merzifon became an important science and trade center under Seljuk and Ottoman rule.</span></p>
+                    </div>
+                </div>
+                <div id="encyclopedia-extras-merzifon" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4"></div>
+            </div>
+
+            <!-- ATATÜRK VE MİLLÎ MİCADELE ÖZEL BÖLÜMÜ -->
+            <div id="bolum-ataturk" class="bg-gradient-to-br from-red-900 to-slate-900 text-white rounded-3xl p-6 sm:p-12 shadow-xl space-y-6 scroll-mt-24">
+                <div class="flex items-center space-x-4 border-b border-red-800 pb-6">
+                    <div class="p-4 bg-red-600 text-white rounded-2xl shadow-inner">
+                        <i class="fa-solid fa-star-and-crescent text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-red-300 font-bold"><span class="lang-tr">Özel Bölüm</span><span class="lang-en">Special Section</span></span>
+                        <h3 class="text-xl sm:text-3xl font-extrabold"><span class="lang-tr">Mustafa Kemal Atatürk ve Millî Mücadele Ruhu</span><span class="lang-en">Mustafa Kemal Atatürk & Spirit of National Struggle</span></h3>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-200 leading-relaxed">
+                    <div class="space-y-4">
+                        <p><span class="lang-tr"><b>Bandırma Vapuru ve Samsun'a Çıkış:</b> Mustafa Kemal Paşa ve 18 silah arkadaşı, 19 Mayıs 1919 sabahı Samsun'a ayak basarak ilk adımı atmıştır.</span><span class="lang-en"><b>Bandırma Ferry & Arrival in Samsun:</b> Mustafa Kemal Pasha and his 18 comrades set foot in Samsun on May 19, 1919.</span></p>
+                    </div>
+                    <div class="space-y-4">
+                        <p><span class="lang-tr"><b>Büyük Millet Meclisi ve Zafer:</b> 23 Nisan 1920'de açılan TBMM, güçler birliği ilkesi ve tam bağımsızlık hedefiyle zaferleri taçlandırmıştır.</span><span class="lang-en"><b>Grand National Assembly & Victory:</b> Opened on April 23, 1920, the GNA crowned the battles with victory.</span></p>
+                    </div>
+                </div>
+                <div id="encyclopedia-extras-ataturk" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 text-slate-800"></div>
+            </div>
+
+            <!-- TÜRK İSLAM BİLİM TARİHİ ÖNCÜLERİ -->
+            <div id="bolum-bilimtarihi" class="bg-white/90 backdrop-blur rounded-3xl shadow-sm border border-slate-200 p-5 sm:p-8 space-y-6 scroll-mt-24">
+                <div class="border-b pb-4 flex items-center space-x-3">
+                    <div class="p-3 bg-red-600 text-white rounded-xl"><i class="fa-solid fa-atom text-xl"></i></div>
+                    <div>
+                        <span class="text-xs font-bold text-red-600 uppercase"><span class="lang-tr">Bilim Mirası</span><span class="lang-en">Science Heritage</span></span>
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-red-950"><span class="lang-tr">Dünyaya Yön Veren Türk-İslam Bilim İnsanları</span><span class="lang-en">Turco-Islamic Scientists Shaping the World</span></h3>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-700 leading-relaxed">
+                    <div class="bg-slate-50 p-5 sm:p-6 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-red-950 text-base flex items-center"><i class="fa-solid fa-gear text-red-600 mr-2"></i> El-Cezeri</h4>
+                        <p class="text-xs text-slate-600"><span class="lang-tr">Sibernetik ve robotik biliminin babası olarak kabul edilen 12. yüzyıl mühendisi.</span><span class="lang-en">12th-century engineer recognized as the father of cybernetics and robotics.</span></p>
+                    </div>
+                    <div class="bg-slate-50 p-5 sm:p-6 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-red-950 text-base flex items-center"><i class="fa-solid fa-calculator text-red-600 mr-2"></i> Harezmi</h4>
+                        <p class="text-xs text-slate-600"><span class="lang-tr">Cebir biliminin kurucusu ve "algoritma" kavramının simgesi olan matematik dâhisi.</span><span class="lang-en">Mathematical genius, founder of algebra and symbol of algorithm.</span></p>
+                    </div>
+                    <div class="bg-slate-50 p-5 sm:p-6 rounded-2xl border border-slate-200 space-y-3">
+                        <h4 class="font-bold text-red-950 text-base flex items-center"><i class="fa-solid fa-heart-pulse text-red-600 mr-2"></i> İbn-i Sina</h4>
+                        <p class="text-xs text-slate-600"><span class="lang-tr"><i>El-Kanun fit-Tıb</i> kitabının yazarı, hekim ve filozof.</span><span class="lang-en">Physician and philosopher, author of The Canon of Medicine.</span></p>
+                    </div>
+                </div>
+                <div id="encyclopedia-extras-bilim" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4"></div>
+            </div>
+
+            <!-- SİBER GÜVENLİK MERKEZİ -->
+            <div id="bolum-siber" class="bg-white/90 backdrop-blur rounded-3xl shadow-sm border border-slate-200 p-5 sm:p-8 space-y-8 scroll-mt-24">
+                <div class="border-b pb-4 flex items-center space-x-3">
+                    <div class="p-3 bg-red-600 text-white rounded-xl"><i class="fa-solid fa-shield-cat text-xl"></i></div>
+                    <div>
+                        <span class="text-xs font-bold text-red-600 uppercase"><span class="lang-tr">Dijital Savunma</span><span class="lang-en">Digital Defense</span></span>
+                        <h3 class="text-xl sm:text-2xl font-extrabold text-red-950"><span class="lang-tr">Siber Güvenlik ve Dijital Savunma Rehberi</span><span class="lang-en">Cyber Security & Digital Defense Guide</span></h3>
+                    </div>
+                </div>
+                
+                <!-- BTK ve Güvenlik Bağlantıları -->
+                <div class="bg-red-50 p-5 sm:p-6 rounded-2xl border border-red-100 space-y-3">
+                    <h4 class="font-bold text-red-950 text-sm flex items-center"><i class="fa-solid fa-link mr-2 text-red-600"></i> <span class="lang-tr">Faydalı Linkler ve Bilinçlendirme Portalları</span><span class="lang-en">Useful Links & Awareness Portals</span></h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <a href="https://internet.btk.gov.tr/ilgili-mevzuat" target="_blank" class="p-2.5 bg-white rounded-xl border border-red-200 text-red-900 font-semibold hover:bg-red-100 transition-colors block"><i class="fa-solid fa-scale-balanced mr-1"></i> BTK İlgili Mevzuat</a>
+                        <a href="https://internet.btk.gov.tr/bilinclendirme" target="_blank" class="p-2.5 bg-white rounded-xl border border-red-200 text-red-900 font-semibold hover:bg-red-100 transition-colors block"><i class="fa-solid fa-graduation-cap mr-1"></i> BTK Bilinçlendirme Portalı</a>
+                        <a href="https://www.ihbarweb.org.tr/" target="_blank" class="p-2.5 bg-white rounded-xl border border-red-200 text-red-900 font-semibold hover:bg-red-100 transition-colors block"><i class="fa-solid fa-triangle-exclamation mr-1"></i> İhbarWeb (Güvenli İnternet)</a>
+                        <a href="https://www.gig.org.tr/hakkinda.php" target="_blank" class="p-2.5 bg-white rounded-xl border border-red-200 text-red-900 font-semibold hover:bg-red-100 transition-colors block"><i class="fa-solid fa-shield-halved mr-1"></i> GIG Hakkında</a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700 leading-relaxed">
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-red-950 text-base"><span class="lang-tr">1. Güçlü Şifre Oluşturma</span><span class="lang-en">1. Creating a Strong Password</span></h4>
+                        <p class="text-xs text-slate-600"><span class="lang-tr">Şifreler en az 12 karakterden oluşmalı; büyük harf, küçük harf, rakam ve özel karakter içermelidir.</span><span class="lang-en">Passwords must be at least 12 characters long.</span></p>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
+                        <h4 class="font-bold text-red-950 text-base"><span class="lang-tr">2. İki Aşamalı Doğrulama (2FA)</span><span class="lang-en">2. Two-Factor Authentication (2FA)</span></h4>
+                        <p class="text-xs text-slate-600"><span class="lang-tr">Hesap güvenliğini sadece şifreye bırakmamak gerekir. SMS veya kimlik doğrulama kodları hesabınızı korur.</span><span class="lang-en">Do not rely solely on passwords.</span></p>
+                    </div>
+                </div>
+                <div id="encyclopedia-extras-siber" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4"></div>
+
+                <div class="pt-6 border-t border-slate-200 space-y-4">
+                    <h4 class="font-bold text-red-950 text-lg sm:text-xl flex items-center space-x-2">
+                        <i class="fa-solid fa-video text-red-600"></i>
+                        <span><span class="lang-tr">Siber Güvenlik Video Arşivi (20 Video)</span><span class="lang-en">Cyber Security Video Archive</span></span>
+                    </h4>
+                    <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+                </div>
+
+                <div class="pt-6 border-t border-slate-200 space-y-4 text-center">
+                    <h4 class="font-bold text-red-950 text-lg sm:text-xl flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-circle-question text-red-600"></i>
+                        <span><span class="lang-tr">Siber Güvenlik Akıllı Test Bankası</span><span class="lang-en">Cyber Security Smart Quiz Bank</span></span>
+                    </h4>
+                    <button onclick="renderQuiz()" class="px-6 py-2.5 bg-red-600 text-white font-semibold rounded-full shadow hover:bg-red-700 transition-all text-xs cursor-pointer inline-flex items-center space-x-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span><span class="lang-tr">Soruları Yenile</span><span class="lang-en">Refresh Questions</span></span>
+                    </button>
+                    <div id="quiz-container" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 text-left space-y-4 shadow-inner max-w-2xl mx-auto"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. TAB: PROJELERİMİZ -->
+        <div id="tab-projeler" class="tab-content hidden fade-in py-10 px-3 sm:px-4 max-w-6xl mx-auto space-y-8">
+            <div class="text-center">
+                <span class="bg-red-100 text-red-800 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
+                    <span class="lang-tr">Uluslararası Başarılar & Projeler</span>
+                    <span class="lang-en">International Achievements & Projects</span>
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-red-950 mt-3 mb-2">
+                    <span class="lang-tr">Erasmus+ ve eTwinning Projelerimiz Arşivi</span>
+                    <span class="lang-en">Our Erasmus+ & eTwinning Projects Archive</span>
+                </h2>
+                <p class="text-slate-600 text-xs sm:text-sm">
+                    <span class="lang-tr">Merzifon Fen Lisesi'nin yıllara göre tam eTwinning ve Erasmus proje arşivi.</span>
+                    <span class="lang-en">Complete eTwinning and Erasmus project archive.</span>
+                </p>
+            </div>
+            
+            <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                <h3 class="font-bold text-red-950 text-sm flex items-center"><i class="fa-solid fa-bullhorn text-red-600 mr-2"></i> <span class="lang-tr">Erasmus+ Resmi Duyuru ve Bağlantılar</span><span class="lang-en">Erasmus+ Official Announcements</span></h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <a href="https://merzifonfenlisesi.meb.k12.tr/icerikler/erasmusprojemizhibealmayahakkazanmistir_17657062.html" target="_blank" class="p-3 bg-red-50 text-red-900 rounded-xl border border-red-200 hover:bg-red-100 transition-colors font-semibold flex items-center justify-between">
+                        <span>Erasmus Projemiz Hibe Kazanmıştır (2026)</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <a href="https://merzifonfenlisesi.meb.k12.tr/icerikler/erasmus-mobility_15060570.html" target="_blank" class="p-3 bg-red-50 text-red-900 rounded-xl border border-red-200 hover:bg-red-100 transition-colors font-semibold flex items-center justify-between">
+                        <span>Erasmus Mobility Bilgilendirme</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div id="dynamic-projects-container" class="space-y-8"></div>
+        </div>
+    </div>
+
+    <!-- YÖNETİCİ ŞİFRE GİRİŞ MODALI -->
+    <div id="admin-login-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl border border-slate-200 space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-extrabold text-lg text-red-950 flex items-center space-x-2">
+                    <i class="fa-solid fa-lock text-red-600"></i>
+                    <span>Yetkili Yönetici Girişi</span>
+                </h3>
+                <button onclick="closeAdminLoginModal()" class="text-slate-400 hover:text-slate-700 font-bold text-lg">&times;</button>
+            </div>
+            <p class="text-xs text-slate-600">İçerik yönetimi için yetkili şifresini giriniz.</p>
+            <div class="space-y-3">
+                <input type="password" id="admin-password-input" placeholder="Yönetici Şifresi..." class="w-full px-4 py-2.5 border border-slate-300 rounded-xl text-xs focus:outline-none focus:border-red-600">
+                <p id="login-error-msg" class="text-[11px] text-red-600 font-bold hidden">Hatalı şifre! Lütfen tekrar deneyin.</p>
+            </div>
+            <div class="flex justify-end space-x-2 pt-2">
+                <button onclick="closeAdminLoginModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">İptal</button>
+                <button onclick="verifyAdminPassword()" class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-semibold shadow">Giriş Yap</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kapsamlı Yönetim Paneli Modalı -->
+    <div id="admin-panel-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-xl w-full shadow-2xl border border-slate-200 space-y-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-extrabold text-lg text-red-950 flex items-center space-x-2">
+                    <i class="fa-solid fa-screwdriver-wrench text-red-600"></i>
+                    <span>MFL Kapsamlı Yönetim Paneli</span>
+                </h3>
+                <button onclick="closeAdminPanel()" class="text-slate-400 hover:text-slate-700 font-bold text-lg">&times;</button>
+            </div>
+
+            <!-- Sekme Seçimi -->
+            <div class="flex flex-wrap gap-2 border-b pb-3 text-xs">
+                <button onclick="switchAdminSubTab('haber')" id="btn-sub-haber" class="px-3 py-2 bg-red-600 text-white font-bold rounded-xl shadow">Haber Ekle</button>
+                <button onclick="switchAdminSubTab('proje')" id="btn-sub-proje" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl">Proje Ekle</button>
+                <button onclick="switchAdminSubTab('personel')" id="btn-sub-personel" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl">Personel Ekle</button>
+                <button onclick="switchAdminSubTab('ansiklopedi')" id="btn-sub-ansiklopedi" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl">Ansiklopedi Ekle</button>
+            </div>
+
+            <!-- 1. Haber Ekleme -->
+            <div id="admin-form-haber" class="space-y-3 text-xs">
+                <h4 class="font-bold text-red-950 text-sm">Yeni Haber veya Duyuru Yayınla (Fotoğraflı)</h4>
+                <div><label class="font-bold text-slate-700 block mb-1">Başlık (Türkçe):</label><input type="text" id="new-news-title" placeholder="Türkçe Başlık..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Başlık (İngilizce):</label><input type="text" id="new-news-title-en" placeholder="English Title..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Fotoğraf URL (İsteğe Bağlı):</label><input type="text" id="new-news-img" placeholder="https://..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Etiket:</label><input type="text" id="new-news-tag" placeholder="Etiket / Tag..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Açıklama (Türkçe):</label><textarea id="new-news-desc" rows="2" placeholder="Türkçe açıklama..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></textarea></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Açıklama (İngilizce):</label><textarea id="new-news-desc-en" rows="2" placeholder="English description..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></textarea></div>
+                <button onclick="addNewNewsItem()" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold shadow">Haber Ekle</button>
+            </div>
+
+            <!-- 2. Proje Ekleme -->
+            <div id="admin-form-proje" class="space-y-3 text-xs hidden">
+                <h4 class="font-bold text-red-950 text-sm">Yeni Proje Ekle (Fotoğraflı)</h4>
+                <div><label class="font-bold text-slate-700 block mb-1">Dönem / Yıl:</label><input type="text" id="new-proj-year" value="2025-2026 Eğitim Öğretim Yılı" class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Proje Adı (Türkçe):</label><input type="text" id="new-proj-title" placeholder="Proje Adı..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Proje Adı (İngilizce):</label><input type="text" id="new-proj-title-en" placeholder="English Project Name..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Fotoğraf URL:</label><input type="text" id="new-proj-img" placeholder="https://..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">TwinSpace Bağlantısı:</label><input type="text" id="new-proj-link" placeholder="https://..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Açıklama (Türkçe):</label><textarea id="new-proj-desc" rows="2" placeholder="Özet..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></textarea></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Açıklama (İngilizce):</label><textarea id="new-proj-desc-en" rows="2" placeholder="English summary..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></textarea></div>
+                <button onclick="addNewProjectItem()" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold shadow">Proje Ekle</button>
+            </div>
+
+            <!-- 3. Personel Ekleme -->
+            <div id="admin-form-personel" class="space-y-3 text-xs hidden">
+                <h4 class="font-bold text-red-950 text-sm">Yeni Personel Ekle</h4>
+                <div><label class="font-bold text-slate-700 block mb-1">Kategori:</label><select id="new-staff-cat" class="w-full px-3 py-2 border border-slate-300 rounded-xl bg-white"><option value="yonetim">Okul Yönetimi</option><option value="ogretmen">Öğretmen</option><option value="personel">Destek Personeli</option></select></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Ad Soyad:</label><input type="text" id="new-staff-name" placeholder="Ad Soyad..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Unvan (Türkçe):</label><input type="text" id="new-staff-title" placeholder="Unvan..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Unvan (İngilizce):</label><input type="text" id="new-staff-title-en" placeholder="English Title..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <button onclick="addNewStaffItem()" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold shadow">Personel Ekle</button>
+            </div>
+
+            <!-- 4. Ansiklopedi Ekleme -->
+            <div id="admin-form-ansiklopedi" class="space-y-3 text-xs hidden">
+                <h4 class="font-bold text-red-950 text-sm">Ansiklopediye Yeni Alt Başlık</h4>
+                <div><label class="font-bold text-slate-700 block mb-1">Hangi Bölüm?</label><select id="new-wiki-section" class="w-full px-3 py-2 border border-slate-300 rounded-xl bg-white"><option value="merzifon">Merzifon Tarihi</option><option value="ataturk">Atatürk ve Millî Mücadele</option><option value="bilim">Türk İslam Bilim Tarihi</option><option value="siber">Siber Güvenlik</option></select></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Alt Başlık (TR):</label><input type="text" id="new-wiki-title" placeholder="Türkçe..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Alt Başlık (EN):</label><input type="text" id="new-wiki-title-en" placeholder="English..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Fotoğraf URL:</label><input type="text" id="new-wiki-img" placeholder="https://..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Açıklama (TR):</label><textarea id="new-wiki-desc" rows="3" placeholder="İçerik..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></textarea></div>
+                <div><label class="font-bold text-slate-700 block mb-1">Açıklama (EN):</label><textarea id="new-wiki-desc-en" rows="3" placeholder="English content..." class="w-full px-3 py-2 border border-slate-300 rounded-xl"></textarea></div>
+                <button onclick="addNewWikiItem()" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold shadow">Ansiklopediye Ekle</button>
+            </div>
+
+            <div class="flex justify-between items-center pt-3 border-t">
+                <button onclick="logoutAdmin()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-semibold">Çıkış Yap</button>
+                <button onclick="closeAdminPanel()" class="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-semibold">Kapat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proje Künyesi -->
+    <section class="py-8 bg-white/90 backdrop-blur border-t border-slate-200 px-3 sm:px-4 mt-12 relative z-10">
+        <div class="max-w-4xl mx-auto text-center space-y-3">
+            <h3 class="text-base sm:text-lg font-bold text-red-950">Proje Künyesi ve Emeği Geçenler</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left text-xs">
+                <div class="bg-red-50 p-4 rounded-2xl border border-red-100">
+                    <h4 class="font-bold text-red-900"><i class="fa-solid fa-code mr-1"></i> Efe Güzel</h4>
+                    <p class="text-slate-600 mt-1">Tasarım, Kodlama & Yapay Zeka Entegrasyonu</p>
+                </div>
+                <div class="bg-rose-50 p-4 rounded-2xl border border-rose-100">
+                    <h4 class="font-bold text-rose-900"><i class="fa-solid fa-video mr-1"></i> Kutluhan Köseoğlu & Begüm Ayvalı</h4>
+                    <p class="text-slate-600 mt-1">Erasmus Projeleri Bulunması, Video Arşivi & İçerik Derlemesi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-6 text-slate-400 text-center text-xs space-y-1 border-t border-slate-800 relative z-10">
+        <p>&copy; 2026 Merzifon Fen Lisesi. Tüm hakları saklıdır.</p>
+        <p class="text-red-400 font-medium tracking-wider">by Efe Güzel</p>
+    </footer>
+
+    <!-- Asistan Mefocan -->
+    <div class="fixed bottom-4 left-4 z-50 flex flex-col items-start">
+        <div id="chat-window" class="hidden mb-3 w-72 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col transition-all duration-300">
+            <div class="bg-red-950 text-white p-3 flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <img src="mefocan.png" class="h-7 w-7 object-cover rounded-full border border-red-400" alt="Mefocan" onerror="this.style.display='none'">
+                    <div>
+                        <h4 class="font-bold text-xs">Mefocan (MFL Asistan)</h4>
+                        <p class="text-[10px] text-red-200"><span class="lang-tr">Çevrim içi Asistan</span><span class="lang-en">Online Assistant</span></p>
+                    </div>
+                </div>
+                <button onclick="toggleChat()" class="text-red-200 hover:text-white text-base font-bold">&times;</button>
+            </div>
+            <div id="chat-messages" class="p-3 h-48 sm:h-56 overflow-y-auto space-y-2 text-xs bg-slate-50">
+                <div class="bg-red-100 text-red-950 p-2.5 rounded-xl rounded-tl-none max-w-[85%] leading-relaxed space-y-1">
+                    <p>
+                        <span class="lang-tr">Merhabalar! Ben Mefocan; Merzifon Fen Lisesi'nin resmi yapay zeka asistanıyım. Okulumuzun Erasmus+ projelerini, dijital ansiklopedisini, tarihini ve siber güvenlik merkezini keşfetmenizde size yardımcı olmaktan mutluluk duyarım! Nasıl yardımcı olabilirim? 😊</span>
+                        <span class="lang-en">Hello! I am Mefocan, the official AI assistant of Merzifon Science High School. I am happy to help you explore our Erasmus+ projects, digital encyclopedia, history, and cyber security center! How can I help you? 😊</span>
+                    </p>
+                </div>
+            </div>
+            <div class="p-2 bg-white border-t border-slate-200 flex space-x-2">
+                <input type="text" id="chat-input" placeholder="Mefocan'a yaz..." class="flex-1 px-3 py-1.5 border border-slate-300 rounded-xl text-xs focus:outline-none focus:border-red-600" onkeypress="handleKeyPress(event)">
+                <button onclick="sendAssistantMessage()" class="bg-red-600 text-white px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-red-700 transition-colors"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+        <button onclick="toggleChat()" class="floating-bot relative bg-red-950 text-white p-1 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 border-2 border-red-400 cursor-pointer flex items-center justify-center">
+            <img src="mefocan.png" class="h-10 w-10 sm:h-11 sm:w-11 object-cover rounded-full" alt="Mefocan Icon" onerror="this.style.display='none'">
+            <span class="absolute top-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></span>
+        </button>
+    </div>
+
+    <!-- Scriptler -->
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
+            e.preventDefault();
+          }
+        });
+
+        function toggleLanguage() {
+            const htmlTag = document.documentElement;
+            const inputField = document.getElementById('chat-input');
+            if (htmlTag.classList.contains('tr-active')) {
+                htmlTag.classList.remove('tr-active');
+                htmlTag.classList.add('en-active');
+                inputField.placeholder = "Write to Mefocan...";
+            } else {
+                htmlTag.classList.remove('en-active');
+                htmlTag.classList.add('tr-active');
+                inputField.placeholder = "Mefocan'a yaz...";
+            }
+            renderQuiz();
+        }
+
+        function toggleChat() { document.getElementById('chat-window').classList.toggle('hidden'); }
+        function toggleDropdownMenu() { document.getElementById('dropdown-menu').classList.toggle('hidden'); }
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function switchTabAndScroll(tabName, elementId) {
+            switchTab(tabName);
+            setTimeout(() => {
+                const el = document.getElementById(elementId);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+        function handleKeyPress(event) { if (event.key === 'Enter') sendAssistantMessage(); }
+
+        let isAdminLoggedIn = false;
+
+        const defaultNewsList = [
+            { titleTR: "2026 Yılı Erasmus+ Projemiz Türkiye Ulusal Ajansı Tarafından Onaylandı", titleEN: "Our 2026 Erasmus+ Project Approved by the Turkish National Agency", tag: "Erasmus+ Başarısı", descTR: "Okulumuzun hazırlamış olduğu \"Fen Öğretiminde Dijital ve Proje Tabanlı Çözümler\" projesi hibe desteği almaya hak kazandı.", descEN: "Our school's project titled \"Digital and Project-Based Solutions in Science Teaching\" has been awarded grant support.", date: "Eylül 2026", img: "" },
+            { titleTR: "TÜBİTAK Bilim Olimpiyatları Birinci Aşama Hazırlıkları Başladı", titleEN: "TÜBİTAK Science Olympiads First Stage Preparations Started", tag: "Akademik Hedef", descTR: "Matematik, Fizik, Kimya ve Biyoloji dallarında genç bilim insanı adaylarımız kamp dönemine girdi.", descEN: "Our young scientist candidates have entered the camp period in Mathematics, Physics, Chemistry, and Biology.", date: "Eylül 2026", img: "" }
+        ];
+
+        const defaultProjectsList = [
+            {
+                year: "2025-2026 Eğitim Öğretim Yılı",
+                items: [
+                    { titleTR: "Blue-Green Tour: Digital Journey to Save Nature", titleEN: "Blue-Green Tour: Digital Journey to Save Nature", descTR: "Doğayı korumak için dijital yolculuk ve sürdürülebilirlik odaklı eTwinning projesi.", descEN: "An eTwinning project focused on digital journey and sustainability to save nature.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/blue-green-tour-digital-journey-save-nature/twinspace", img: "" },
+                    { titleTR: "Digital Schools & Innovative Education", titleEN: "Digital Schools & Innovative Education", descTR: "Dijital okullar ve yenilikçi eğitim yaklaşımları eTwinning projesi.", descEN: "Digital schools and innovative education approaches eTwinning project.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/digital-schools-innovative-education/twinspace", img: "" }
+                ]
+            },
+            {
+                year: "2024-2025 Eğitim Öğretim Yılı",
+                items: [
+                    { titleTR: "Do It Yourself: Innovative and Digital Learning (DIY)", titleEN: "Do It Yourself: Innovative and Digital Learning (DIY)", descTR: "Kendin yap kültürü, yenilikçi ve dijital öğrenme araçları projesi.", descEN: "Do it yourself culture, innovative and digital learning tools project.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/do-it-yourself-innovative-and-digital-learning-diy/twinspace", img: "" },
+                    { titleTR: "Cultural Heritage Detectives & Artificial Intelligence", titleEN: "Cultural Heritage Detectives & Artificial Intelligence", descTR: "Yapay zeka ile kültürel miras dedektifliği ve tarihi değerlerin incelenmesi.", descEN: "Cultural heritage detective work with artificial intelligence and examination of historical values.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/cultural-heritage-detectives-artificial-intelligence/twinspace", img: "" },
+                    { titleTR: "Different Cultures, Same Happiness", titleEN: "Different Cultures, Same Happiness", descTR: "Farklı kültürler ve ortak mutluluk temalı uluslararası eTwinning projesi.", descEN: "International eTwinning project themed around different cultures and shared happiness.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/different-cultures-same-happiness/twinspace", img: "" }
+                ]
+            },
+            {
+                year: "2023-2024 Eğitim Öğretim Yılı",
+                items: [
+                    { titleTR: "Small Touches Happiness Elderly", titleEN: "Small Touches Happiness Elderly", descTR: "Yaşlı bireylere yönelik sosyal sorumluluk ve küçük dokunuşlarla mutluluk projesi.", descEN: "Social responsibility project targeting elderly individuals and happiness through small touches.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/small-touches-happiness-elderly", img: "" },
+                    { titleTR: "Awareness on Social Media Manipulations Among Youth", titleEN: "Awareness on Social Media Manipulations Among Youth", descTR: "Gençler arasında sosyal medya manipülasyonlarına karşı bilinç kazandırma projesi.", descEN: "Project to raise awareness among youth against social media manipulations.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/awareness-social-media-manipulations-among-youth", img: "" },
+                    { titleTR: "Nature Awareness Among Youth and Sustainability", titleEN: "Nature Awareness Among Youth and Sustainability", descTR: "Gençlerde doğa bilinci ve sürdürülebilirlik odaklı çevre projesi.", descEN: "Environmental project focused on nature awareness and sustainability among youth.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/nature-awareness-among-youth-and-sustainability", img: "" }
+                ]
+            },
+            {
+                year: "2022-2023 Eğitim Öğretim Yılı",
+                items: [
+                    { titleTR: "Place Where I Live Reflects Me & Its History", titleEN: "Place Where I Live Reflects Me & Its History", descTR: "Yaşadığım yer, tarihi ve kültürel dokusuyla beni yansıtıyor eTwinning projesi.", descEN: "The place where I live reflects me with its historical and cultural texture eTwinning project.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/place-where-i-live-reflects-me-its-history-yasadigim-yer-tarihiyle-beni-yansitir", img: "" }
+                ]
+            },
+            {
+                year: "2021-2022 Eğitim Öğretim Yılı",
+                items: [
+                    { titleTR: "My Water, My Future", titleEN: "My Water, My Future", descTR: "Su kaynaklarının verimli kullanımı ve geleceğimiz için su bilinci projesi.", descEN: "Efficient use of water resources and water awareness for our future project.", link: "https://school-education.ec.europa.eu/en/etwinning/projects/my-water-my-future", img: "" }
+                ]
+            }
+        ];
+
+        const defaultStaffData = {
+            yonetim: [
+                { name: "Ergin HÖKELEK", titleTR: "Okul Müdürü", titleEN: "School Principal" },
+                { name: "Güven GEÇKİN", titleTR: "Müdür Yardımcısı", titleEN: "Vice Principal" }
+            ],
+            ogretmen: [
+                { name: "Kadir BAŞ", titleTR: "Matematik Öğretmeni", titleEN: "Mathematics Teacher" },
+                { name: "Kerim ADALI", titleTR: "Matematik Öğretmeni", titleEN: "Mathematics Teacher" },
+                { name: "Murat ÖZDEMİR", titleTR: "Matematik Öğretmeni", titleEN: "Mathematics Teacher" },
+                { name: "Çiğdem CİNEL", titleTR: "Matematik Öğretmeni", titleEN: "Mathematics Teacher" },
+                { name: "Evren UYSAL", titleTR: "Fizik Öğretmeni", titleEN: "Physics Teacher" },
+                { name: "Mehmet ÖZBEY", titleTR: "Fizik Öğretmeni", titleEN: "Physics Teacher" },
+                { name: "Ayşe AŞICI", titleTR: "Kimya Öğretmeni", titleEN: "Chemistry Teacher" },
+                { name: "Oğuzhan AY", titleTR: "Kimya Öğretmeni", titleEN: "Chemistry Teacher" },
+                { name: "Muazzez CEYLAN", titleTR: "Biyoloji Öğretmeni", titleEN: "Biology Teacher" },
+                { name: "Neslihan ADALI", titleTR: "Biyoloji Öğretmeni", titleEN: "Biology Teacher" },
+                { name: "Tülay SÖZEN", titleTR: "Türk Dili ve Ed. Öğretmeni", titleEN: "Turkish Language & Lit. Teacher" },
+                { name: "Esma KOÇ", titleTR: "Türk Dili ve Ed. Öğretmeni", titleEN: "Turkish Language & Lit. Teacher" },
+                { name: "Gülhan ÇELİKEL", titleTR: "Bilgisayar Öğretmeni", titleEN: "Computer Science Teacher" },
+                { name: "Süha TOPALOĞLU", titleTR: "Tarih Öğretmeni", titleEN: "History Teacher" },
+                { name: "Kısmet KARAKUŞ", titleTR: "Coğrafya Öğretmeni", titleEN: "Geography Teacher" },
+                { name: "Esma TIĞLI", titleTR: "Din Kültürü ve Ahlak Bilgisi", titleEN: "Religious Culture & Ethics Teacher" },
+                { name: "Nejla ATAMAN", titleTR: "İngilizce Öğretmeni", titleEN: "English Teacher" },
+                { name: "Engin SATILMIŞ", titleTR: "İngilizce Öğretmeni", titleEN: "English Teacher" },
+                { name: "Alkan ALTIN", titleTR: "Almanca Öğretmeni", titleEN: "German Teacher" },
+                { name: "Murtaza Cem DERİN", titleTR: "Felsefe Öğretmeni", titleEN: "Philosophy Teacher" },
+                { name: "Serhat YİĞMAN", titleTR: "Beden Eğitimi Öğretmeni", titleEN: "Physical Education Teacher" },
+                { name: "Murat SEZER", titleTR: "Görsel Sanatlar Öğretmeni", titleEN: "Visual Arts Teacher" },
+                { name: "Cemal Serdar BAYRAK", titleTR: "Müzik Öğretmeni", titleEN: "Music Teacher" },
+                { name: "Meryem ERDEM", titleTR: "Rehber Öğretmen", titleEN: "Guidance Counselor" }
+            ],
+            personel: [
+                { name: "Salih ANKARA", titleTR: "Memur", titleEN: "Officer" },
+                { name: "Engin KAYA", titleTR: "Kütüphane Memuru", titleEN: "Librarian" },
+                { name: "Saime SEZGİN", titleTR: "Yardımcı Hizmetli", titleEN: "Support Staff" }
+            ]
+        };
+
+        const defaultWikiExtras = {
+            merzifon: [],
+            ataturk: [],
+            bilim: [],
+            siber: []
+        };
+
+        function getStored(key, def) {
+            const stored = localStorage.getItem(key);
+            return stored ? JSON.parse(stored) : def;
+        }
+
+        function renderNews() {
+            const container = document.getElementById('dynamic-news-container');
+            if (!container) return;
+            const newsList = getStored('mfl_dynamic_news', defaultNewsList);
+            container.innerHTML = newsList.map((item, index) => `
+                <div class="p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 flex flex-col justify-between relative">
+                    ${isAdminLoggedIn ? `<button onclick="deleteNews(${index})" class="absolute top-3 right-3 text-red-600 bg-white px-2 py-1 rounded shadow text-xs font-bold z-10"><i class="fa-solid fa-trash"></i> Sil</button>` : ''}
+                    ${item.img ? `<img src="${item.img}" class="w-full h-40 object-cover rounded-xl shadow-sm mb-2" alt="Haber Görseli">` : ''}
+                    <div class="space-y-2 pr-12">
+                        <span class="text-[10px] bg-red-100 text-red-800 font-bold px-2.5 py-1 rounded-md">${item.tag}</span>
+                        <h4 class="font-extrabold text-red-950 text-sm">
+                            <span class="lang-tr">${item.titleTR}</span>
+                            <span class="lang-en">${item.titleEN}</span>
+                        </h4>
+                        <p class="text-slate-600">
+                            <span class="lang-tr">${item.descTR}</span>
+                            <span class="lang-en">${item.descEN}</span>
+                        </p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('dynamic-projects-container');
+            if (!container) return;
+            const projGroups = getStored('mfl_dynamic_projects', defaultProjectsList);
+            container.innerHTML = projGroups.map((group, gIdx) => `
+                <div class="space-y-3">
+                    <h3 class="text-base sm:text-lg font-bold text-red-950 border-b pb-2 flex items-center"><i class="fa-solid fa-calendar-days mr-2 text-red-600"></i> ${group.year}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        ${group.items.map((proj, pIdx) => `
+                            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm relative space-y-2 flex flex-col justify-between">
+                                ${isAdminLoggedIn ? `<button onclick="deleteProj(${gIdx}, ${pIdx})" class="absolute top-2 right-2 text-red-600 bg-slate-100 px-2 py-0.5 rounded text-[10px] font-bold z-10"><i class="fa-solid fa-trash"></i></button>` : ''}
+                                ${proj.img ? `<img src="${proj.img}" class="w-full h-36 object-cover rounded-xl shadow-sm mb-1" alt="Proje Görseli">` : ''}
+                                <div>
+                                    <h4 class="font-bold text-red-900 text-sm pr-8">
+                                        <span class="lang-tr">${proj.titleTR}</span>
+                                        <span class="lang-en">${proj.titleEN}</span>
+                                    </h4>
+                                    <p class="text-slate-600 mt-1">
+                                        <span class="lang-tr">${proj.descTR}</span>
+                                        <span class="lang-en">${proj.descEN}</span>
+                                    </p>
+                                </div>
+                                ${proj.link ? `<a href="${proj.link}" target="_blank" class="inline-flex items-center text-red-600 font-bold hover:underline pt-1"><i class="fa-solid fa-link mr-1"></i> TwinSpace / Bağlantı <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i></a>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderStaff() {
+            const container = document.getElementById('dynamic-staff-container');
+            if (!container) return;
+            const staff = getStored('mfl_dynamic_staff', defaultStaffData);
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <h4 class="font-bold text-red-950 text-base sm:text-lg border-l-4 border-red-600 pl-3">Okul Yönetimi</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        ${staff.yonetim.map((item, idx) => `
+                            <div class="p-4 bg-red-50 rounded-2xl border border-red-100 flex items-center justify-between relative">
+                                ${isAdminLoggedIn ? `<button onclick="deleteStaff('yonetim', ${idx})" class="absolute top-2 right-2 text-red-600 bg-white px-2 py-0.5 rounded text-[10px] font-bold"><i class="fa-solid fa-trash"></i></button>` : ''}
+                                <div>
+                                    <h5 class="font-bold text-red-950 text-sm">${item.name}</h5>
+                                    <p class="text-slate-600"><span class="lang-tr">${item.titleTR}</span><span class="lang-en">${item.titleEN}</span></p>
+                                </div>
+                                <i class="fa-solid fa-user-tie text-red-600 text-xl mr-6"></i>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-red-950 text-base sm:text-lg border-l-4 border-red-600 pl-3">Öğretmen Kadrosu</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                        ${staff.ogretmen.map((item, idx) => `
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 relative">
+                                ${isAdminLoggedIn ? `<button onclick="deleteStaff('ogretmen', ${idx})" class="absolute top-2 right-2 text-red-600 bg-white px-1.5 py-0.5 rounded text-[10px] font-bold shadow"><i class="fa-solid fa-trash"></i></button>` : ''}
+                                <strong>${item.name}</strong><br>
+                                <span class="text-slate-500"><span class="lang-tr">${item.titleTR}</span><span class="lang-en">${item.titleEN}</span></span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-red-950 text-base sm:text-lg border-l-4 border-red-600 pl-3">Memur ve Destek Personeli</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        ${staff.personel.map((item, idx) => `
+                            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 relative">
+                                ${isAdminLoggedIn ? `<button onclick="deleteStaff('personel', ${idx})" class="absolute top-2 right-2 text-red-600 bg-white px-1.5 py-0.5 rounded text-[10px] font-bold shadow"><i class="fa-solid fa-trash"></i></button>` : ''}
+                                <strong>${item.name}</strong><br>
+                                <span class="text-slate-500"><span class="lang-tr">${item.titleTR}</span><span class="lang-en">${item.titleEN}</span></span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderWikiExtras() {
+            const extras = getStored('mfl_dynamic_wiki', defaultWikiExtras);
+            ['merzifon', 'ataturk', 'bilim', 'siber'].forEach(sec => {
+                const box = document.getElementById('encyclopedia-extras-' + sec);
+                if(box) {
+                    const list = extras[sec] || [];
+                    box.innerHTML = list.map((item, idx) => `
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 relative space-y-2 md:col-span-2">
+                            ${isAdminLoggedIn ? `<button onclick="deleteWiki('${sec}',${idx})" class="absolute top-3 right-3 text-red-600 bg-white px-2 py-1 rounded text-xs font-bold shadow z-10"><i class="fa-solid fa-trash"></i> Sil</button>` : ''}
+                            ${item.img ? `<img src="${item.img}" class="w-full h-48 object-cover rounded-xl shadow-sm mb-2" alt="Ansiklopedi Görseli">` : ''}
+                            <h4 class="font-bold text-red-950 text-base pr-12"><i class="fa-solid fa-bookmark text-red-600 mr-2"></i> 
+                                <span class="lang-tr">${item.titleTR}</span>
+                                <span class="lang-en">${item.titleEN}</span>
+                            </h4>
+                            <p class="text-xs text-slate-700 leading-relaxed">
+                                <span class="lang-tr">${item.descTR}</span>
+                                <span class="lang-en">${item.descEN}</span>
+                            </p>
+                        </div>
+                    `).join('');
+                }
+            });
+        }
+
+        function openAdminLoginModal() {
+            document.getElementById('admin-login-modal').classList.remove('hidden');
+            document.getElementById('admin-password-input').value = '';
+            document.getElementById('login-error-msg').classList.add('hidden');
+        }
+        function closeAdminLoginModal() { document.getElementById('admin-login-modal').classList.add('hidden'); }
+
+        function verifyAdminPassword() {
+            const pass = document.getElementById('admin-password-input').value;
+            if (pass === 'MeRzİfOnFeN-2011') {
+                isAdminLoggedIn = true;
+                closeAdminLoginModal();
+                document.getElementById('admin-action-btn').classList.remove('hidden');
+                openAdminPanel();
+                refreshAll();
+            } else {
+                document.getElementById('login-error-msg').classList.remove('hidden');
+            }
+        }
+
+        function openAdminPanel() { document.getElementById('admin-panel-modal').classList.remove('hidden'); }
+        function closeAdminPanel() { document.getElementById('admin-panel-modal').classList.add('hidden'); }
+        function logoutAdmin() {
+            isAdminLoggedIn = false;
+            document.getElementById('admin-action-btn').classList.add('hidden');
+            closeAdminPanel();
+            refreshAll();
+            alert("Oturum kapatıldı.");
+        }
+
+        function switchAdminSubTab(sub) {
+            ['haber', 'proje', 'personel', 'ansiklopedi'].forEach(s => {
+                document.getElementById('admin-form-' + s).classList.add('hidden');
+                document.getElementById('btn-sub-' + s).className = "px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl";
+            });
+            document.getElementById('admin-form-' + sub).classList.remove('hidden');
+            document.getElementById('btn-sub-' + sub).className = "px-3 py-2 bg-red-600 text-white font-bold rounded-xl shadow";
+        }
+
+        function addNewNewsItem() {
+            const titleTR = document.getElementById('new-news-title').value.trim();
+            const titleEN = document.getElementById('new-news-title-en').value.trim();
+            const tag = document.getElementById('new-news-tag').value.trim() || "Duyuru";
+            const img = document.getElementById('new-news-img').value.trim();
+            const descTR = document.getElementById('new-news-desc').value.trim();
+            const descEN = document.getElementById('new-news-desc-en').value.trim();
+            if(!titleTR || !titleEN || !descTR || !descEN) { alert("Lütfen başlık ve açıklama alanlarını doldurun!"); return; }
+            let list = getStored('mfl_dynamic_news', defaultNewsList);
+            list.unshift({ titleTR, titleEN, tag, img, descTR, descEN, date: "Eylül 2026" });
+            localStorage.setItem('mfl_dynamic_news', JSON.stringify(list));
+            document.getElementById('new-news-title').value = '';
+            document.getElementById('new-news-title-en').value = '';
+            document.getElementById('new-news-img').value = '';
+            document.getElementById('new-news-desc').value = '';
+            document.getElementById('new-news-desc-en').value = '';
+            renderNews();
+            alert("Haber başarıyla eklendi!");
+        }
+        function deleteNews(i) {
+            let list = getStored('mfl_dynamic_news', defaultNewsList);
+            list.splice(i, 1);
+            localStorage.setItem('mfl_dynamic_news', JSON.stringify(list));
+            renderNews();
+        }
+
+        function addNewProjectItem() {
+            const year = document.getElementById('new-proj-year').value.trim();
+            const titleTR = document.getElementById('new-proj-title').value.trim();
+            const titleEN = document.getElementById('new-proj-title-en').value.trim();
+            const img = document.getElementById('new-proj-img').value.trim();
+            const link = document.getElementById('new-proj-link').value.trim() || "https://school-education.ec.europa.eu";
+            const descTR = document.getElementById('new-proj-desc').value.trim();
+            const descEN = document.getElementById('new-proj-desc-en').value.trim();
+            if(!titleTR || !titleEN || !descTR || !descEN) { alert("Lütfen proje bilgilerini doldurun!"); return; }
+            let groups = getStored('mfl_dynamic_projects', defaultProjectsList);
+            let g = groups.find(x => x.year === year);
+            if(g) g.items.unshift({ titleTR, titleEN, descTR, descEN, link, img });
+            else groups.unshift({ year, items: [{ titleTR, titleEN, descTR, descEN, link, img }] });
+            localStorage.setItem('mfl_dynamic_projects', JSON.stringify(groups));
+            renderProjects();
+            alert("Proje başarıyla eklendi!");
+        }
+        function deleteProj(g, p) {
+            let groups = getStored('mfl_dynamic_projects', defaultProjectsList);
+            groups[g].items.splice(p, 1);
+            if(groups[g].items.length === 0) groups.splice(g, 1);
+            localStorage.setItem('mfl_dynamic_projects', JSON.stringify(groups));
+            renderProjects();
+        }
+
+        function addNewStaffItem() {
+            const cat = document.getElementById('new-staff-cat').value;
+            const name = document.getElementById('new-staff-name').value.trim();
+            const titleTR = document.getElementById('new-staff-title').value.trim();
+            const titleEN = document.getElementById('new-staff-title-en').value.trim();
+            if(!name || !titleTR || !titleEN) { alert("Lütfen alanları doldurun!"); return; }
+            let staff = getStored('mfl_dynamic_staff', defaultStaffData);
+            if(staff[cat]) staff[cat].push({ name, titleTR, titleEN });
+            localStorage.setItem('mfl_dynamic_staff', JSON.stringify(staff));
+            renderStaff();
+            alert("Personel eklendi!");
+        }
+        function deleteStaff(cat, idx) {
+            let staff = getStored('mfl_dynamic_staff', defaultStaffData);
+            staff[cat].splice(idx, 1);
+            localStorage.setItem('mfl_dynamic_staff', JSON.stringify(staff));
+            renderStaff();
+        }
+
+        function addNewWikiItem() {
+            const sec = document.getElementById('new-wiki-section').value;
+            const titleTR = document.getElementById('new-wiki-title').value.trim();
+            const titleEN = document.getElementById('new-wiki-title-en').value.trim();
+            const img = document.getElementById('new-wiki-img').value.trim();
+            const descTR = document.getElementById('new-wiki-desc').value.trim();
+            const descEN = document.getElementById('new-wiki-desc-en').value.trim();
+            if(!titleTR || !titleEN || !descTR || !descEN) { alert("Lütfen ansiklopedi alanlarını doldurun!"); return; }
+            let extras = getStored('mfl_dynamic_wiki', defaultWikiExtras);
+            if(!extras[sec]) extras[sec] = [];
+            extras[sec].unshift({ titleTR, titleEN, descTR, descEN, img });
+            localStorage.setItem('mfl_dynamic_wiki', JSON.stringify(extras));
+            document.getElementById('new-wiki-title').value = '';
+            document.getElementById('new-wiki-title-en').value = '';
+            document.getElementById('new-wiki-img').value = '';
+            document.getElementById('new-wiki-desc').value = '';
+            document.getElementById('new-wiki-desc-en').value = '';
+            renderWikiExtras();
+            alert("Ansiklopediye içerik eklendi!");
+        }
+        function deleteWiki(sec, idx) {
+            let extras = getStored('mfl_dynamic_wiki', defaultWikiExtras);
+            extras[sec].splice(idx, 1);
+            localStorage.setItem('mfl_dynamic_wiki', JSON.stringify(extras));
+            renderWikiExtras();
+        }
+
+        // Videolar
+        const videoList = Array.from({length: 20}, (_, i) => ({ title: `Siber Güvenlik Eğitimi #${i+1}`, link: "http://www.youtube.com/watch?v=Ybecqy2S7Ro" }));
+        function renderVideos() {
+            const grid = document.getElementById('video-grid');
+            if(!grid) return;
+            grid.innerHTML = videoList.map((v, i) => `
+                <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex flex-col justify-between space-y-2">
+                    <h4 class="font-bold text-red-950 text-xs">${v.title}</h4>
+                    <a href="${v.link}" target="_blank" class="py-1.5 bg-red-600 text-white rounded-xl text-[11px] font-semibold text-center block"><i class="fa-solid fa-play mr-1"></i> İzle</a>
+                </div>
+            `).join('');
+        }
+
+        // Test Bankası
+        const quizPool = [
+            { qTR: "Güçlü bir şifre hangi karakterleri içermelidir?", qEN: "What characters should a strong password include?", optsTR: ["A) Sadece ad", "B) Büyük/küçük harf, rakam, özel karakter", "C) Sadece sayı", "D) Ardışık harfler"], optsEN: ["A) Only name", "B) Uppercase/lowercase, numbers, special characters", "C) Only numbers", "D) Sequential letters"], ans: 1 },
+            { qTR: "İki aşamalı doğrulama (2FA) ne sağlar?", qEN: "What does Two-Factor Authentication (2FA) provide?", optsTR: ["A) Hız", "B) Ekstra güvenlik katmanı", "C) Oyun performansı", "D) Pil tasarrufu"], optsEN: ["A) Speed", "B) Extra security layer", "C) Gaming performance", "D) Battery saving"], ans: 1 }
+        ];
+        function renderQuiz() {
+            const isEnglish = document.documentElement.classList.contains('en-active');
+            const container = document.getElementById('quiz-container');
+            if(!container) return;
+            let item = quizPool[Math.floor(Math.random() * quizPool.length)];
+            let opts = isEnglish ? item.optsEN : item.optsTR;
+            container.innerHTML = `
+                <h4 class="font-bold text-xs sm:text-sm text-red-950">${isEnglish ? item.qEN : item.qTR}</h4>
+                <div class="space-y-1.5 mt-2">
+                    ${opts.map((opt, idx) => `<button onclick="checkQuiz(${idx},${item.ans}, this)" class="w-full text-left p-2.5 bg-white rounded-xl border border-slate-200 text-xs font-bold text-slate-900 cursor-pointer shadow-sm">${opt}</button>`).join('')}
+                </div>
+                <p id="quiz-fb" class="font-bold text-xs mt-2"></p>
+            `;
+        }
+        function checkQuiz(sel, cor, btn) {
+            const isEnglish = document.documentElement.classList.contains('en-active');
+            const btns = btn.parentElement.querySelectorAll('button');
+            btns.forEach(b => b.disabled = true);
+            const fb = document.getElementById('quiz-fb');
+            if(sel === cor) { 
+                btn.classList.remove('text-slate-900');
+                btn.classList.add('bg-green-500', 'text-white'); 
+                fb.textContent = isEnglish ? "🎉 Correct!" : "🎉 Doğru cevap!"; 
+                fb.className = "font-bold text-xs mt-2 text-green-600"; 
+            } else { 
+                btn.classList.remove('text-slate-900');
+                btn.classList.add('bg-red-500', 'text-white'); 
+                btns[cor].classList.remove('text-slate-900');
+                btns[cor].classList.add('bg-green-500', 'text-white'); 
+                fb.textContent = isEnglish ? "❌ Incorrect." : "❌ Yanlış cevap."; 
+                fb.className = "font-bold text-xs mt-2 text-red-600"; 
+            }
+        }
+
+        function refreshAll() {
+            renderNews();
+            renderProjects();
+            renderStaff();
+            renderWikiExtras();
+        }
+
+        window.onload = function() {
+            refreshAll();
+            renderVideos();
+            renderQuiz();
+        };
+
+        async function sendAssistantMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.innerHTML += `<div class="bg-red-600 text-white p-2 rounded-xl rounded-tr-none max-w-[85%] ml-auto">${message}</div>`;
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            const isEnglish = document.documentElement.classList.contains('en-active');
+            setTimeout(() => {
+                let reply = isEnglish ? "Hello! As Mefocan, I am here to help you explore our school's projects, encyclopedia, and safety guides! How can I assist you today? 😊" : "Merhabalar! Ben Mefocan, okulumuzun projelerini, ansiklopedisini ve rehberlerini keşfetmenizde size yardımcı olmaktan mutluluk duyuyorum! Nasıl yardımcı olabilirim? 😊";
+                chatMessages.innerHTML += `<div class="bg-red-100 text-red-950 p-2 rounded-xl rounded-tl-none max-w-[85%] leading-relaxed">${reply}</div>`;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 600);
+        }
+    </script>
+</body>
+</html>
